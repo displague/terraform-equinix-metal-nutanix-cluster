@@ -28,7 +28,7 @@ output "nutanix_cluster1_ssh_forward_command" {
 
 output "nutanix_cluster2_ssh_forward_command" {
   description = "SSH port forward command to use to connect to the Prism GUI"
-  value       = "ssh -L 9440:${module.nutanix_cluster2.cvim_ip_address}:9440 -L 19440:${module.nutanix_cluster2.prism_central_ip_address}:9440 -i ${module.nutanix_cluster2.ssh_private_key} root@${module.nutanix_cluster2.bastion_public_ip}"
+  value       = "ssh -L 9442:${module.nutanix_cluster2.cvim_ip_address}:9440 -L 19442:${module.nutanix_cluster2.prism_central_ip_address}:9440 -i ${module.nutanix_cluster2.ssh_private_key} root@${module.nutanix_cluster2.bastion_public_ip}"
 }
 
 output "nutanix_cluster1_cvim_ip_address" {
@@ -43,12 +43,12 @@ output "nutanix_cluster2_cvim_ip_address" {
 
 output "nutanix_cluster1_virtual_ip_address" {
   description = "Reserved IP for cluster virtal IP"
-  value       =  module.nutanix_cluster1.virtual_ip_address
+  value       = module.nutanix_cluster1.virtual_ip_address
 }
 
 output "nutanix_cluster2_virtual_ip_address" {
   description = "Reserved IP for cluster virtal IP"
-  value       =  module.nutanix_cluster2.virtual_ip_address
+  value       = module.nutanix_cluster2.virtual_ip_address
 }
 
 output "nutanix_cluster1_iscsi_data_services_ip" {
