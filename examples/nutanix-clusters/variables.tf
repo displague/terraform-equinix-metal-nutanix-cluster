@@ -113,4 +113,3 @@ variable "cluster_subnet" {
   default     = "192.168.100.0/22"
   description = "nutanix cluster subnet"
 }
-

@@ -15,6 +15,7 @@ This example demonstrates how to create two Nutanix clusters and set up a protec
 1. **Create two Nutanix clusters**
 
     1.1. Clone the repository:
+
     ```sh
     git clone git@github.com:equinix-labs/terraform-equinix-metal-nutanix-cluster.git
     cd terraform-equinix-metal-nutanix-cluster
@@ -22,6 +23,7 @@ This example demonstrates how to create two Nutanix clusters and set up a protec
     ```
 
     1.2. Create the `terraform.tfvars` file:
+
     ```hcl
     metal_project_id       = "XXXXXXXXXXXXXXXXXXXXXXX"
     metal_organization_id  = "XXXXXXXXXXXXXXXXXXXXXXX" # The ID of the Metal organization in which to create the project if `create_project` is true.
@@ -40,6 +42,7 @@ This example demonstrates how to create two Nutanix clusters and set up a protec
     ```
 
     1.3. Initialize and apply Terraform:
+
     ```sh
     terraform init
     terraform plan
@@ -50,6 +53,7 @@ This example demonstrates how to create two Nutanix clusters and set up a protec
     ![Network Topology](assets/NutanixClusterTopology.jpg)
 
     1.5. After a successful run, the expected output is:
+
     ```
     Outputs:
 
@@ -75,6 +79,7 @@ This example demonstrates how to create two Nutanix clusters and set up a protec
 1. **Set up network resources to connect the clusters**
 
     1.1. Access Cluster 1:
+
     ```sh
     ssh -L 9440:192.168.97.57:9440 -L 19440:192.168.99.252:9440 -i /Users/vasubabu/Equinix/terraform-equinix-metal-nutanix-cluster/examples/nutanix-clusters/ssh-key-qh0f2 root@145.40.91.33
     ```
@@ -83,6 +88,7 @@ This example demonstrates how to create two Nutanix clusters and set up a protec
     [Nutanix Metal Workshop - Access Prism UI](https://equinix-labs.github.io/nutanix-on-equinix-metal-workshop/parts/3-access_prism_ui/)
 
     1.3. Access Cluster 2:
+
     ```sh
     ssh -L 9442:192.168.102.176:9440 -L 19442:192.168.103.252:9440 -i /Users/vasubabu/Equinix/terraform-equinix-metal-nutanix-cluster/examples/nutanix-clusters/ssh-key-lha20 root@145.40.91.141
     ```
@@ -92,19 +98,21 @@ This example demonstrates how to create two Nutanix clusters and set up a protec
 
     1.5. Run the firewall rules to establish connectivity between the two clusters:
 
-        1.5.1. On Cluster 1:
-        ```sh
-        ssh -L 9440:192.168.97.57:9440 -L 19440:192.168.99.252:9440 -i /Users/vasubabu/Equinix/terraform-equinix-metal-nutanix-cluster/examples/nutanix-clusters/ssh-key-qh0f2 root@145.40.91.33
-        ssh admin@192.168.97.57
-        sudo ip route add 192.168.100.0/22 via 192.168.96.1
-        ```
+    1.5.1. On Cluster 1:
 
-        1.5.2. On Cluster 2:
-        ```sh
-        ssh -L 9442:192.168.102.176:9440 -L 19442:192.168.103.252:9440 -i /Users/vasubabu/Equinix/terraform-equinix-metal-nutanix-cluster/examples/nutanix-clusters/ssh-key-lha20 root@145.40.91.141
-        ssh admin@192.168.102.176
-        sudo ip route add 192.168.96.0/22 via 192.168.100.1
-        ```
+    ```sh
+    ssh -L 9440:192.168.97.57:9440 -L 19440:192.168.99.252:9440 -i /Users/vasubabu/Equinix/terraform-equinix-metal-nutanix-cluster/examples/nutanix-clusters/ssh-key-qh0f2 root@145.40.91.33
+    ssh admin@192.168.97.57
+    sudo ip route add 192.168.100.0/22 via 192.168.96.1
+    ```
+
+    1.5.2. On Cluster 2:
+
+    ```sh
+    ssh -L 9442:192.168.102.176:9440 -L 19442:192.168.103.252:9440 -i /Users/vasubabu/Equinix/terraform-equinix-metal-nutanix-cluster/examples/nutanix-clusters/ssh-key-lha20 root@145.40.91.141
+    ssh admin@192.168.102.176
+    sudo ip route add 192.168.96.0/22 via 192.168.100.1
+    ```
 
     **Note:** It is recommended to use Cluster 1 in a normal window and Cluster 2 in an incognito window.
 
